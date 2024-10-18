@@ -40,6 +40,11 @@ public class csWine : ISeed<csWine>, IEquatable<csWine>, IComparable<csWine>
     public override int GetHashCode() => (this.Name, this.GrapeType, this.WineType, this.Country).GetHashCode();
     #endregion
 
+    #region operator overloading
+    public static bool operator ==(csWine o1, csWine o2) => o1.Equals(o2);
+    public static bool operator !=(csWine o1, csWine o2) => !o1.Equals(o2);
+    #endregion
+
     #region Implementation IComparable<T> interface
     public int CompareTo(csWine other)
     {
