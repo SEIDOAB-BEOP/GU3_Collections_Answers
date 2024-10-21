@@ -51,3 +51,10 @@ public class csMyList<T> : List<T>, IMyList<T>
             return nrItems;
         }}
 }
+
+/* extra uppgift
+
+1.  Ändra ItemOccurances public Dictionary<T, (int, List<T>)> ItemsOccurances
+2.  Modifiera ItemOccurances så att för varje Key T i dictionary ska det finnas en tupple som först ger besked om hur många gånger T förekommer,
+    och sedan ger en lista på alla förekomster.
+*/
