@@ -14,7 +14,7 @@ for (int i = 0; i < 50; i++)
 
 System.Console.WriteLine("\nNr of occurances of each ints");
 ints1?.ItemsOccurances.ToList().ForEach(item => {
-    if (item.Value > 1)
+    if (item.Value.Item1 > 1)
     System.Console.WriteLine($"{item.Key} occur {item.Value} time(s)");
     });
 
@@ -38,9 +38,13 @@ rnd.ItemsToList<csWine>(50).ForEach(w => wines1?.Add(w));
 
 System.Console.WriteLine("\nNr of occurances of each wine");
 wines1?.ItemsOccurances.ToList().ForEach(item => {
-    if (item.Value > 1)
-    System.Console.WriteLine($"{item.Key} occur {item.Value} time(s)");
-    });
+    if (item.Value.Item1 > 1){
+        System.Console.WriteLine($"{item.Key} occur {item.Value} time(s)");
+        foreach (var w in item.Value.Item2)
+        {
+            System.Console.WriteLine($"    -- {w}");
+        }
+    }});
 
 System.Console.WriteLine($"\n{nameof(wines1)} contains duplicates: {wines1?.ContainsDuplicates}");
 System.Console.WriteLine($"\n{nameof(wines1)} contains pairs: {wines1?.ContainsPair}");

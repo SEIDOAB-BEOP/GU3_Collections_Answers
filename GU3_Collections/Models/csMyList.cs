@@ -9,20 +9,32 @@ public class csMyList<T> : List<T>, IMyList<T>
     
     public bool ContainsPair { get
         {
-            Dictionary<T, int> nrItems = ItemsOccurances;
-            return nrItems.ContainsValue(2);
+            Dictionary<T, (int, List<T>)> nrItems = ItemsOccurances;
+            foreach (var item in nrItems.Values)
+            {
+                if (item.Item1 == 2) return true;
+            }
+            return false;
         }}
 
     public bool ContainsTripplets { get
         {
-            Dictionary<T, int> nrItems = ItemsOccurances;
-            return nrItems.ContainsValue(3);
+            Dictionary<T, (int, List<T>)> nrItems = ItemsOccurances;
+            foreach (var item in nrItems.Values)
+            {
+                if (item.Item1 == 3) return true;
+            }
+            return false;
         }}
 
     public bool ContainsQuads { get
         {
-            Dictionary<T, int> nrItems = ItemsOccurances;
-            return nrItems.ContainsValue(4);
+            Dictionary<T, (int, List<T>)> nrItems = ItemsOccurances;
+            foreach (var item in nrItems.Values)
+            {
+                if (item.Item1 == 4) return true;
+            }
+            return false;
         }}
 
     public bool ContainsFullHouse => ContainsPair && ContainsTripplets;
@@ -34,18 +46,26 @@ public class csMyList<T> : List<T>, IMyList<T>
         }}
 
 
-    public Dictionary<T, int> ItemsOccurances { get
+    public Dictionary<T, (int, List<T>)> ItemsOccurances { get
         {
-            var nrItems = new Dictionary<T, int>();
+            var nrItems = new Dictionary<T,  (int, List<T>)>();
             this.ForEach(p =>
             {
                 if (nrItems.ContainsKey(p))
                 {
-                    nrItems[p]++;
+                    var t = nrItems[p];
+                    t.Item1++;
+                    t.Item2.Add(p);
+
+                    nrItems[p] = t;
                 }
                 else
-                {
-                    nrItems.Add(p, 1);
+                {   
+                    (int, List<T>) t = (1, null);
+                    t.Item2 = new List<T>();
+                    t.Item2.Add(p);
+
+                    nrItems.Add(p, t);
                 }
             });
             return nrItems;

@@ -35,5 +35,5 @@ public interface IMyList<T>: IList<T>
     /// returns Dictionary<T, int> which has an entry for every unique item in the list as Dictionary Key. 
     /// Dictionary Value is the number of times the item occurs in the list
     /// </summary>
-    public Dictionary<T, int> ItemsOccurances {get;}
+    public Dictionary<T, (int, List<T>)> ItemsOccurances {get;}
 }
